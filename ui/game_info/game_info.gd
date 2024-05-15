@@ -63,3 +63,7 @@ func _on_status_changed() -> void:
 		timer.start()
 	else:
 		timer.stop()
+
+
+func _on_credits_meta_clicked(meta: Variant) -> void:
+	OS.shell_open(str(meta))

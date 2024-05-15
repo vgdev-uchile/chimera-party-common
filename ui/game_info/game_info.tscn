@@ -1,4 +1,4 @@
-[gd_scene load_steps=15 format=3 uid="uid://x8cea3v5rvo0"]
+[gd_scene load_steps=17 format=3 uid="uid://x8cea3v5rvo0"]
 
 [ext_resource type="Script" path="res://common/ui/game_info/game_info.gd" id="1_3vdmc"]
 [ext_resource type="PackedScene" uid="uid://b2sj63yuj4e4y" path="res://common/ui/game_info/game_input.tscn" id="2_kmhfd"]
@@ -10,12 +10,17 @@
 [ext_resource type="Texture2D" uid="uid://b8ssqsne0ktk5" path="res://common/assets/sprites/window.png" id="9_2uuou"]
 [ext_resource type="Texture2D" uid="uid://bcbnjudxibp0o" path="res://common/chimerin/assets/chimerin.png" id="9_lg2jq"]
 [ext_resource type="Texture2D" uid="uid://cr4gnvbpcg14d" path="res://common/assets/sprites/window_back.png" id="10_4x63s"]
+[ext_resource type="FontFile" uid="uid://dh0hwfmlfr8tf" path="res://common/assets/fonts/Abaddon_Fonts_v1.2/Abaddon Light.ttf" id="11_nhl0h"]
+[ext_resource type="FontFile" uid="uid://d2prf68aedwvv" path="res://common/assets/fonts/Abaddon_Fonts_v1.2/Abaddon Bold.ttf" id="12_p6d3x"]
 
 [sub_resource type="LabelSettings" id="LabelSettings_cqw52"]
 font = ExtResource("7_yydrl")
 font_size = 60
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_24s3t"]
+content_margin_left = 32.0
+content_margin_top = 32.0
+content_margin_right = 32.0
 content_margin_bottom = 32.0
 bg_color = Color(0.301961, 0.65098, 0.721569, 1)
 border_width_left = 16
@@ -232,15 +237,23 @@ title = "Credits"
 initial_position = 2
 size = Vector2i(600, 800)
 visible = true
+exclusive = false
 content_scale_mode = 1
 content_scale_aspect = 1
 theme = SubResource("Theme_b3kck")
 
 [node name="Credits" type="RichTextLabel" parent="CreditsWindow"]
 unique_name_in_owner = true
-offset_left = 16.0
-offset_top = 16.0
-offset_right = 584.0
+offset_left = 32.0
+offset_top = 32.0
+offset_right = 568.0
 offset_bottom = 696.0
+theme_override_fonts/normal_font = ExtResource("11_nhl0h")
+theme_override_fonts/bold_font = ExtResource("12_p6d3x")
 bbcode_enabled = true
+text = "sadfsdf
+[b]asdfdsf[/b]
+[url]asdfsdf[/url]"
 fit_content = true
+
+[connection signal="meta_clicked" from="CreditsWindow/Credits" to="." method="_on_credits_meta_clicked"]

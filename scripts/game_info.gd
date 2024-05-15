@@ -5,3 +5,5 @@ extends Resource
 @export_multiline var description: String
 @export var image: Texture2D
 @export var inputs: Array[GameInput]
+@export var author: String
+@export_multiline var credits: String

@@ -1,4 +1,4 @@
-[gd_scene load_steps=12 format=3 uid="uid://x8cea3v5rvo0"]
+[gd_scene load_steps=15 format=3 uid="uid://x8cea3v5rvo0"]
 
 [ext_resource type="Script" path="res://common/ui/game_info/game_info.gd" id="1_3vdmc"]
 [ext_resource type="PackedScene" uid="uid://b2sj63yuj4e4y" path="res://common/ui/game_info/game_input.tscn" id="2_kmhfd"]
@@ -15,6 +15,34 @@
 font = ExtResource("7_yydrl")
 font_size = 60
 
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_24s3t"]
+content_margin_bottom = 32.0
+bg_color = Color(0.301961, 0.65098, 0.721569, 1)
+border_width_left = 16
+border_width_top = 16
+border_width_right = 16
+border_width_bottom = 16
+border_color = Color(0.72549, 0.917647, 0.952941, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_reexk"]
+bg_color = Color(0.301961, 0.65098, 0.721569, 1)
+border_width_left = 8
+border_width_top = 8
+border_width_right = 8
+border_width_bottom = 8
+border_color = Color(0, 0, 0, 0.498039)
+expand_margin_left = 16.0
+expand_margin_top = 64.0
+expand_margin_right = 16.0
+expand_margin_bottom = 16.0
+
+[sub_resource type="Theme" id="Theme_b3kck"]
+AcceptDialog/styles/panel = SubResource("StyleBoxFlat_24s3t")
+Window/constants/close_v_offset = 48
+Window/constants/title_height = 56
+Window/font_sizes/title_font_size = 57
+Window/styles/embedded_border = SubResource("StyleBoxFlat_reexk")
+
 [node name="GameInfo" type="Control"]
 layout_mode = 3
 anchors_preset = 15
@@ -22,6 +50,7 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+mouse_filter = 2
 script = ExtResource("1_3vdmc")
 game_input_scene = ExtResource("2_kmhfd")
 player_status_scene = ExtResource("8_2obht")
@@ -36,6 +65,7 @@ metadata/_edit_lock_ = true
 anchors_preset = 0
 offset_right = 40.0
 offset_bottom = 40.0
+mouse_filter = 2
 metadata/_edit_group_ = true
 metadata/_edit_lock_ = true
 
@@ -115,6 +145,7 @@ offset_top = -40.0
 offset_right = 20.0
 grow_horizontal = 2
 grow_vertical = 0
+mouse_filter = 2
 
 [node name="MarginContainer" type="MarginContainer" parent="Control2"]
 layout_mode = 1
@@ -173,3 +204,43 @@ texture = ExtResource("9_2uuou")
 
 [node name="Timer" type="Timer" parent="."]
 one_shot = true
+
+[node name="MarginContainer" type="MarginContainer" parent="."]
+layout_mode = 1
+anchors_preset = 3
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -411.0
+offset_top = -124.0
+grow_horizontal = 0
+grow_vertical = 0
+theme_override_constants/margin_right = 16
+theme_override_constants/margin_bottom = 8
+
+[node name="Author" type="Button" parent="MarginContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+mouse_default_cursor_shape = 2
+theme_override_fonts/font = ExtResource("7_yydrl")
+theme_override_font_sizes/font_size = 75
+text = "by Author"
+
+[node name="CreditsWindow" type="AcceptDialog" parent="."]
+title = "Credits"
+initial_position = 2
+size = Vector2i(600, 800)
+visible = true
+content_scale_mode = 1
+content_scale_aspect = 1
+theme = SubResource("Theme_b3kck")
+
+[node name="Credits" type="RichTextLabel" parent="CreditsWindow"]
+unique_name_in_owner = true
+offset_left = 16.0
+offset_top = 16.0
+offset_right = 584.0
+offset_bottom = 696.0
+bbcode_enabled = true
+fit_content = true

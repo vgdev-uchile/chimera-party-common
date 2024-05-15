@@ -9,7 +9,11 @@ extends Control
 @onready var description: RichTextLabel = %Description
 @onready var inputs_container: VBoxContainer = %InputsContainer
 @onready var player_status_container: GridContainer = %PlayerStatusContainer
+@onready var author: Button = %Author
+@onready var credits: RichTextLabel = %Credits
 @onready var timer: Timer = $Timer
+@onready var credits_window: AcceptDialog = $CreditsWindow
+
 
 
 func _ready() -> void:
@@ -20,6 +24,10 @@ func _ready() -> void:
 	image.texture = info.image
 	title.text = info.name
 	description.text = info.description
+	author.text = "by %s" % info.author
+	credits.text = info.credits
+	author.pressed.connect(func(): credits_window.show())
+	credits_window.hide()
 	
 	_fill_game_inputs()
 	_fill_player_status()

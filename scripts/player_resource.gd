@@ -3,10 +3,10 @@ extends Resource
 
 
 enum PlayerInput {
-	WASD_ZX             = 1 << 0,
-	TFGH_VB             = 1 << 1,
-	IJKL_NM             = 1 << 2,
-	ARROWS_SHIFTCONTROL = 1 << 3,
+	WASD_ZX,
+	TFGH_VB,
+	IJKL_NM,
+	ARROWS_SHIFTCONTROL,
 }
 
 @export var color: Color

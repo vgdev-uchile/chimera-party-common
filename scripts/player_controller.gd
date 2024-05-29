@@ -51,6 +51,9 @@ extends Node
 ##         # action_a was pressed, do something
 ## [/codeblock]
 
+## Emitted when the current controllable changes color.
+signal color_changed(color)
+
 
 ## Player data.
 var data: PlayerData:
@@ -85,6 +88,15 @@ var action_b: StringName  = "action_b"
 func setup(player_data: PlayerData, on_color_changed: Callable) -> void:
 	_on_color_changed = on_color_changed
 	data = player_data
+
+
+## Changes controllable's color
+func set_color(color: Color) -> void:
+	if data:
+		data.color = color
+		if _on_color_changed:
+			_on_color_changed.call(color)
+		color_changed.emit(color)
 
 
 var _on_color_changed: Callable

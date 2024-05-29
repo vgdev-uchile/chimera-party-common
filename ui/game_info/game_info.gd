@@ -15,23 +15,11 @@ extends Control
 @onready var credits_window: AcceptDialog = $CreditsWindow
 
 
-
 func _ready() -> void:
-	var info = Game.get_current_game_info()
-	if not info:
-		Debug.log("No test_game_info info on Game autoload")
-		return
-	image.texture = info.image
-	title.text = info.name
-	description.text = info.description
-	author.text = "by %s" % info.author
-	credits.text = info.credits
+	update_info()
 	author.pressed.connect(func(): credits_window.show())
 	credits_window.hide()
-	
-	_fill_game_inputs()
-	_fill_player_status()
-	
+	_fill_player_status()	
 	timer.timeout.connect(func(): Game.load_current_game())
 
 
@@ -39,6 +27,9 @@ func _fill_game_inputs() -> void:
 	var info = Game.get_current_game_info()
 	if not info or not game_input_scene:
 		return
+	for child in inputs_container.get_children():
+		inputs_container.remove_child(child)
+		child.queue_free()
 	for game_input in info.inputs:
 		var game_input_inst = game_input_scene.instantiate()
 		game_input_inst.setup(game_input)
@@ -48,6 +39,9 @@ func _fill_game_inputs() -> void:
 func _fill_player_status() -> void:
 	if not player_status_scene:
 		return
+	for child in player_status_container.get_children():
+		player_status_container.remove_child(child)
+		child.queue_free()
 	for player in Game.players:
 		var player_status_inst = player_status_scene.instantiate()
 		player_status_container.add_child(player_status_inst)
@@ -67,3 +61,17 @@ func _on_status_changed() -> void:
 
 func _on_credits_meta_clicked(meta: Variant) -> void:
 	OS.shell_open(str(meta))
+
+
+func update_info() -> void:
+	var info = Game.get_current_game_info()
+	if not info:
+		Debug.log("No test_game_info info on Game autoload")
+		return
+	image.texture = info.image
+	title.text = info.name
+	description.text = info.description
+	author.text = "by %s" % info.author
+	credits.text = info.credits
+	
+	_fill_game_inputs()

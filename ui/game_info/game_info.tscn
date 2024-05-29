@@ -1,7 +1,8 @@
-[gd_scene load_steps=17 format=3 uid="uid://x8cea3v5rvo0"]
+[gd_scene load_steps=18 format=3 uid="uid://x8cea3v5rvo0"]
 
 [ext_resource type="Script" path="res://common/ui/game_info/game_info.gd" id="1_3vdmc"]
 [ext_resource type="PackedScene" uid="uid://b2sj63yuj4e4y" path="res://common/ui/game_info/game_input.tscn" id="2_kmhfd"]
+[ext_resource type="Texture2D" uid="uid://bl2kciuerc4po" path="res://common/assets/sprites/wall_back.png" id="4_vu1ip"]
 [ext_resource type="Texture2D" uid="uid://cmscr0monysuq" path="res://common/assets/sprites/clipboard.png" id="5_h4ug1"]
 [ext_resource type="Texture2D" uid="uid://bjuhyiopnnf5q" path="res://common/assets/sprites/hand.png" id="6_teiks"]
 [ext_resource type="FontFile" uid="uid://curhgcv5hcwqh" path="res://common/assets/fonts/dnf-paste-8x12.ttf" id="7_yydrl"]
@@ -10,17 +11,13 @@
 [ext_resource type="Texture2D" uid="uid://b8ssqsne0ktk5" path="res://common/assets/sprites/window.png" id="9_2uuou"]
 [ext_resource type="Texture2D" uid="uid://bcbnjudxibp0o" path="res://common/chimerin/assets/chimerin.png" id="9_lg2jq"]
 [ext_resource type="Texture2D" uid="uid://cr4gnvbpcg14d" path="res://common/assets/sprites/window_back.png" id="10_4x63s"]
-[ext_resource type="FontFile" uid="uid://dh0hwfmlfr8tf" path="res://common/assets/fonts/Abaddon_Fonts_v1.2/Abaddon Light.ttf" id="11_nhl0h"]
-[ext_resource type="FontFile" uid="uid://d2prf68aedwvv" path="res://common/assets/fonts/Abaddon_Fonts_v1.2/Abaddon Bold.ttf" id="12_p6d3x"]
+[ext_resource type="Texture2D" uid="uid://jrh226mqxhwr" path="res://common/assets/sprites/wall_screen.png" id="11_26qpa"]
 
 [sub_resource type="LabelSettings" id="LabelSettings_cqw52"]
 font = ExtResource("7_yydrl")
 font_size = 60
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_24s3t"]
-content_margin_left = 32.0
-content_margin_top = 32.0
-content_margin_right = 32.0
 content_margin_bottom = 32.0
 bg_color = Color(0.301961, 0.65098, 0.721569, 1)
 border_width_left = 16
@@ -41,12 +38,25 @@ expand_margin_top = 64.0
 expand_margin_right = 16.0
 expand_margin_bottom = 16.0
 
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_bqlp7"]
+bg_color = Color(0.168, 0.361333, 0.4, 1)
+border_width_left = 8
+border_width_top = 8
+border_width_right = 8
+border_width_bottom = 8
+border_color = Color(0, 0, 0, 0.498039)
+expand_margin_left = 16.0
+expand_margin_top = 64.0
+expand_margin_right = 16.0
+expand_margin_bottom = 16.0
+
 [sub_resource type="Theme" id="Theme_b3kck"]
 AcceptDialog/styles/panel = SubResource("StyleBoxFlat_24s3t")
 Window/constants/close_v_offset = 48
 Window/constants/title_height = 56
 Window/font_sizes/title_font_size = 57
 Window/styles/embedded_border = SubResource("StyleBoxFlat_reexk")
+Window/styles/embedded_unfocused_border = SubResource("StyleBoxFlat_bqlp7")
 
 [node name="GameInfo" type="Control"]
 layout_mode = 3
@@ -59,6 +69,12 @@ mouse_filter = 2
 script = ExtResource("1_3vdmc")
 game_input_scene = ExtResource("2_kmhfd")
 player_status_scene = ExtResource("8_2obht")
+
+[node name="WallBack" type="Sprite2D" parent="."]
+position = Vector2(960, 540)
+scale = Vector2(6, 6)
+texture = ExtResource("4_vu1ip")
+metadata/_edit_lock_ = true
 
 [node name="Wall" type="Sprite2D" parent="."]
 position = Vector2(960, 540)
@@ -138,6 +154,35 @@ unique_name_in_owner = true
 layout_mode = 2
 theme_override_constants/separation = 0
 
+[node name="WindowBack" type="Sprite2D" parent="."]
+position = Vector2(576, 444)
+scale = Vector2(6, 6)
+texture = ExtResource("10_4x63s")
+
+[node name="Image" type="TextureRect" parent="."]
+unique_name_in_owner = true
+layout_mode = 1
+anchors_preset = 4
+anchor_top = 0.5
+anchor_bottom = 0.5
+offset_left = 102.0
+offset_top = -384.0
+offset_right = 1062.0
+offset_bottom = 156.0
+grow_vertical = 2
+texture = ExtResource("9_lg2jq")
+stretch_mode = 5
+
+[node name="Window" type="Sprite2D" parent="."]
+position = Vector2(576, 444)
+scale = Vector2(6, 6)
+texture = ExtResource("9_2uuou")
+
+[node name="WallScreen" type="Sprite2D" parent="."]
+position = Vector2(960, 540)
+scale = Vector2(6, 6)
+texture = ExtResource("11_26qpa")
+
 [node name="Control2" type="Control" parent="."]
 layout_mode = 1
 anchors_preset = 7
@@ -183,30 +228,6 @@ unique_name_in_owner = true
 layout_mode = 2
 columns = 2
 
-[node name="WindowBack" type="Sprite2D" parent="."]
-position = Vector2(576, 444)
-scale = Vector2(6, 6)
-texture = ExtResource("10_4x63s")
-
-[node name="Image" type="TextureRect" parent="."]
-unique_name_in_owner = true
-layout_mode = 1
-anchors_preset = 4
-anchor_top = 0.5
-anchor_bottom = 0.5
-offset_left = 102.0
-offset_top = -384.0
-offset_right = 1062.0
-offset_bottom = 156.0
-grow_vertical = 2
-texture = ExtResource("9_lg2jq")
-stretch_mode = 5
-
-[node name="Window" type="Sprite2D" parent="."]
-position = Vector2(576, 444)
-scale = Vector2(6, 6)
-texture = ExtResource("9_2uuou")
-
 [node name="Timer" type="Timer" parent="."]
 one_shot = true
 
@@ -236,30 +257,15 @@ text = "by Author"
 title = "Credits"
 initial_position = 2
 size = Vector2i(600, 800)
-exclusive = false
-max_size = Vector2i(600, 800)
 content_scale_mode = 1
 content_scale_aspect = 1
 theme = SubResource("Theme_b3kck")
 
 [node name="Credits" type="RichTextLabel" parent="CreditsWindow"]
 unique_name_in_owner = true
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-offset_left = 32.0
-offset_top = 32.0
-offset_right = -32.0
-offset_bottom = -104.0
-grow_horizontal = 2
-grow_vertical = 2
-size_flags_horizontal = 3
-size_flags_vertical = 3
-theme_override_fonts/normal_font = ExtResource("11_nhl0h")
-theme_override_fonts/bold_font = ExtResource("12_p6d3x")
+offset_left = 16.0
+offset_top = 16.0
+offset_right = 584.0
+offset_bottom = 696.0
 bbcode_enabled = true
-text = "sadfsdf
-[b]asdfdsf[/b]
-[url]asdfsdf[/url]"
-
-[connection signal="meta_clicked" from="CreditsWindow/Credits" to="." method="_on_credits_meta_clicked"]
+fit_content = true

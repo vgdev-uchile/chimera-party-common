@@ -18,10 +18,6 @@ var is_ready: bool = false:
 		status_changed.emit()
 
 
-func _ready() -> void:
-	pc.color_changed.connect(_on_color_changed)
-
-
 func _input(event: InputEvent) -> void:
 	if event.is_action_pressed(pc.action_a):
 		is_ready = true
@@ -30,8 +26,8 @@ func _input(event: InputEvent) -> void:
 
 
 func setup(player_data: PlayerData) -> void:
-	pc.setup(player_data)
+	pc.setup(player_data, on_color_changed)
 
 
-func _on_color_changed(color: Color) -> void:
+func on_color_changed(color: Color) -> void:
 	color_rect.color = color

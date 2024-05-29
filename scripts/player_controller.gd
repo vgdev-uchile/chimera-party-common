@@ -6,18 +6,15 @@ extends Node
 ## It allows you to get the correct input actions for a given [PlayerData].
 ## Every controllable node must have its player's color (be a character, a button, etc),
 ## and this node provides an easy way to set it up.[br]
-## In the parent node you must connect [signal color_change] and forward [method setup]:
+## In the parent node you must forward [method setup]:
 ## [codeblock]
 ## # my_player.gd
 ## @onready var pc: PlayerController = PlayerController
 ##
-## func _ready() -> void:
-##     pc.color_changed.connect(_on_color_changed)
-##
 ## func setup(player_data: PlayerData) -> void:
-##     pc.setup(player_data)
+##     pc.setup(player_data, on_color_changed)
 ##
-## func _on_color_changed(color: Color) -> void:
+## func on_color_changed(color: Color) -> void:
 ##     visual_element.color = color
 ## [/codeblock]
 ##
@@ -55,14 +52,9 @@ extends Node
 ## [/codeblock]
 
 
-## Emitted when the current controllable node must change color.
-signal color_changed(color)
-
-
 ## Player data.
 var data: PlayerData:
 	set(value):
-		var last_data = data
 		data = value
 		move_left = "move_left_%d" % data.input
 		move_right = "move_right_%d" % data.input
@@ -70,8 +62,8 @@ var data: PlayerData:
 		move_down = "move_down_%d" % data.input
 		action_a = "action_a_%d" % data.input
 		action_b = "action_b_%d" % data.input
-		if not last_data or last_data.color != data.color:
-			color_changed.emit(data.color)
+		if _on_color_changed:
+			_on_color_changed.call(data.color)
 
 
 ## Move left action name.
@@ -90,5 +82,9 @@ var action_b: StringName  = "action_b"
 
 ## Setup player data.[br]
 ## Must be called [b]after[/b] adding its parent to the game.
-func setup(player_data: PlayerData) -> void:
+func setup(player_data: PlayerData, on_color_changed: Callable) -> void:
+	_on_color_changed = on_color_changed
 	data = player_data
+
+
+var _on_color_changed: Callable

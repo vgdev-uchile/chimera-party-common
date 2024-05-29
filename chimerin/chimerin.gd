@@ -19,7 +19,6 @@ func _ready() -> void:
 	animation_tree.active = true
 	push_area.body_entered.connect(_on_body_entered)
 	push_area.body_exited.connect(_on_body_exited)
-	pc.color_changed.connect(_on_color_changed)
 
 
 func _physics_process(delta: float) -> void:
@@ -55,10 +54,10 @@ func _physics_process(delta: float) -> void:
 
 
 func setup(player_data: PlayerData) -> void:
-	pc.setup(player_data)
+	pc.setup(player_data, on_color_changed)
 
 
-func _on_color_changed(color: Color) -> void:
+func on_color_changed(color: Color) -> void:
 	body_sprite.self_modulate = color
 
 
